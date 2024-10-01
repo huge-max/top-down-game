@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class playermovement : MonoBehaviour
 {
    public float speed;
-   private SriteRenderer sr;
+   private SpriteRenderer sr;
    public Sprite upSprite;
    public Sprite downSprite;
    public Sprite leftSprite;
@@ -24,28 +25,36 @@ public class playermovement : MonoBehaviour
        if(Input.GetKey("d"))
        {
            newPosition.x += speed;
-           sr.sprite = rightSprite;
+          
        }
 
        if(Input.GetKey("a"))
        {
            newPosition.x -= speed;
-           sr.sprite = leftSprite;
+           
        }
 
        if(Input.GetKey("w"))
        {
            newPosition.y += speed;
-           sr.sprite = upSprite;
+           
        }
 
        if(Input.GetKey("s"))
        {
            newPosition.y -= speed;
-           sr.sprite = downSprite;
+           
        }
         transform.position = newPosition;
     } 
 
-         
-}
+    private void OnCollisionEnter2D(Collision2D collision)     
+    {
+        if (collision.gameObject.tag.Equals("door1"))
+        {
+            Debug.Log("i got in");
+            SceneManager.LoadScene(1);
+        }    
+    }
+
+}   
