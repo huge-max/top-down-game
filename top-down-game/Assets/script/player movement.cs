@@ -5,15 +5,15 @@ using UnityEngine;
 public class playermovement : MonoBehaviour
 {
    public float speed;
-    private SriteRenderer sr;
-    public sprite upSprite;
-    public sprite downSprite;
-    public sprite leftSprite;
-    public sprite rightSprite;
+   private SriteRenderer sr;
+   public Sprite upSprite;
+   public Sprite downSprite;
+   public Sprite leftSprite;
+   public Sprite rightSprite;
 // Start is called before the first frame update
     void Start()
     {
-        sr = GetComponent<SpriteRenderer>{};
+       sr = GetComponent<SpriteRenderer>();
     }
     // Update is called once per frame
     void Update()
