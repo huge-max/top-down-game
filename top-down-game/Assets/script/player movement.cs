@@ -11,6 +11,7 @@ public class playermovement : MonoBehaviour
    public Sprite downSprite;
    public Sprite leftSprite;
    public Sprite rightSprite;
+   public bool hasKey = false;
 // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +56,16 @@ public class playermovement : MonoBehaviour
             Debug.Log("i got in");
             SceneManager.LoadScene(1);
         }    
+        
+        if (collision.gameObject.tag.Equals("key"))
+        {
+            Debug.Log("got the key");
+            hasKey = true;
+        }  
+        
+         if (collision.gameObject.tag.Equals("door1") && hasKey == true)
+        {
+             Debug.Log("open");
+        }
     }
-
 }   

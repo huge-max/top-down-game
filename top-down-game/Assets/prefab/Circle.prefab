@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5648022245943438102}
   m_Layer: 0
   m_Name: Circle
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -166,3 +166,4 @@ MonoBehaviour:
   downSprite: {fileID: 0}
   leftSprite: {fileID: 0}
   rightSprite: {fileID: 0}
+  hasKey: 0
