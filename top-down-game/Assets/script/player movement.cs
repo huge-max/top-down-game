@@ -12,10 +12,18 @@ public class playermovement : MonoBehaviour
    public Sprite leftSprite;
    public Sprite rightSprite;
    public bool hasKey = false;
+
+   public static playermovement instance;
 // Start is called before the first frame update
     void Start()
     {
        sr = GetComponent<SpriteRenderer>();
+       if(instance != null)
+       {
+           Destroy(gameObject);
+       }
+       instance = this;
+       gameObject.DontDestroyOnLaod(this.gameObject);
     }
     // Update is called once per frame
     void Update()
@@ -38,7 +46,7 @@ public class playermovement : MonoBehaviour
        if(Input.GetKey("w"))
        {
            newPosition.y += speed;
-           
+          
        }
 
        if(Input.GetKey("s"))
@@ -63,9 +71,11 @@ public class playermovement : MonoBehaviour
             hasKey = true;
         }  
         
-         if (collision.gameObject.tag.Equals("door1") && hasKey == true)
+         if (collision.gameObject.tag.Equals("door2") && hasKey == true)
         {
              Debug.Log("open");
+             SceneManager.LoadScene(2);
+
         }
     }
 }   
