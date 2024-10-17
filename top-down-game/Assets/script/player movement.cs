@@ -12,18 +12,18 @@ public class playermovement : MonoBehaviour
    public Sprite leftSprite;
    public Sprite rightSprite;
    public bool hasKey = false;
-
+   public AudioSource soundEffects;
+   public AudioClip itemCollect;
+   public AudioClip doorEnter;
+   public AudioClip[] sound;
    public static playermovement instance;
 // Start is called before the first frame update
     void Start()
-    {
-       sr = GetComponent<SpriteRenderer>();
-       if(instance != null)
-       {
-           Destroy(gameObject);
-       }
-       instance = this;
-       gameObject.DontDestroyOnLaod(this.gameObject);
+    {    
+    soundEffects = 
+    GetComponent<AudioSource>();
+    sr = GetComponent<SpriteRenderer>();
+      
     }
     // Update is called once per frame
     void Update()
@@ -62,18 +62,21 @@ public class playermovement : MonoBehaviour
         if (collision.gameObject.tag.Equals("door1"))
         {
             Debug.Log("i got in");
+            soundEffects.PlayOneShot(sound[0], .7f);
             SceneManager.LoadScene(1);
         }    
         
         if (collision.gameObject.tag.Equals("key"))
         {
             Debug.Log("got the key");
+            soundEffects.PlayOneShot(sound[2], .7f);
             hasKey = true;
         }  
         
          if (collision.gameObject.tag.Equals("door2") && hasKey == true)
         {
              Debug.Log("open");
+             soundEffects.PlayOneShot(sound[1], .7f);
              SceneManager.LoadScene(2);
 
         }

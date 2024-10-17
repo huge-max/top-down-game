@@ -20,6 +20,7 @@ public class key : MonoBehaviour
          if(collision.gameObject.tag.Equals("Player"))
          {
                Debug.Log("collected");
+               
                Destroy(this.gameObject);
          }
     } 
