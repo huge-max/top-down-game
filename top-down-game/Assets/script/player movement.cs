@@ -20,8 +20,7 @@ public class playermovement : MonoBehaviour
 // Start is called before the first frame update
     void Start()
     {    
-    soundEffects = 
-    GetComponent<AudioSource>();
+    soundEffects = GetComponent<AudioSource>();
     sr = GetComponent<SpriteRenderer>();
       
     }
@@ -80,5 +79,16 @@ public class playermovement : MonoBehaviour
              SceneManager.LoadScene(2);
 
         }
+    
+        if (collision.gameObject.tag.Equals("door3"))
+        {
+             Debug.Log("open");
+             //soundEffects.PlayOneShot(sound[1], .7f);
+             SceneManager.LoadScene(3);
+
+        }
+          
+          
     }
+
 }   
