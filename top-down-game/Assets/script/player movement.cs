@@ -17,78 +17,67 @@ public class playermovement : MonoBehaviour
    public AudioClip doorEnter;
    public AudioClip[] sound;
    public static playermovement instance;
+   public float jumpForce;
+   Rigidbody2D rb;
+   public bool isGrounded;
+    public GameManager gm;
 // Start is called before the first frame update
     void Start()
     {    
     soundEffects = GetComponent<AudioSource>();
     sr = GetComponent<SpriteRenderer>();
-      
+    rb = GetComponent<Rigidbody2D>();  
     }
     // Update is called once per frame
     void Update()
     {
-   
-       Vector3 newPosition = transform.position;
-
-       if(Input.GetKey("d"))
-       {
-           newPosition.x += speed;
-          
-       }
-
-       if(Input.GetKey("a"))
-       {
-           newPosition.x -= speed;
+   Vector3 newPosition = transform.position;
+        //variables to mirror the player
+        Vector3 newScale = transform.localScale;
+        float currentScale = Mathf.Abs(transform.localScale.x); //take absolute value of the current x scale, this is always positive
+        if (Input.GetKey("a") || Input.GetKey(KeyCode.LeftArrow))
+        {
+            newPosition.x -= speed;
+            newScale.x = -currentScale;
+            
+        }
+        if (Input.GetKey("d") || Input.GetKey(KeyCode.RightArrow))
+        {
+            newPosition.x += speed;
+            newScale.x = currentScale;
            
-       }
-
-       if(Input.GetKey("w"))
-       {
-           newPosition.y += speed;
-          
-       }
-
-       if(Input.GetKey("s"))
-       {
-           newPosition.y -= speed;
-           
-       }
+        }
+        if (Input.GetKey("w") && isGrounded)
+        {
+             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        }
+      
+        
         transform.position = newPosition;
-    } 
-
-    private void OnCollisionEnter2D(Collision2D collision)     
+        transform.localScale = newScale;
+   }    
+       private void OnCollisionEnter2D(Collision2D collision)     
     {
-        if (collision.gameObject.tag.Equals("door1"))
+        if(collision.gameObject.tag.Equals("ground"))
         {
             Debug.Log("i got in");
-            soundEffects.PlayOneShot(sound[0], .7f);
-            SceneManager.LoadScene(1);
-        }    
+            
+            isGrounded = true;
+        } 
+        if(collision.gameObject.tag.Equals("coin"))
+        {
+            gm.score++;
+            Destroy(collision.gameObject);
+        } 
+    }
         
-        if (collision.gameObject.tag.Equals("key"))
+ 
+    private void OnCollisionExit2D(Collision2D collision)     
+    {
+        if(collision.gameObject.tag.Equals("ground"))
         {
-            Debug.Log("got the key");
-            soundEffects.PlayOneShot(sound[2], .7f);
-            hasKey = true;
-        }  
-        
-         if (collision.gameObject.tag.Equals("door2") && hasKey == true)
-        {
-             Debug.Log("open");
-             soundEffects.PlayOneShot(sound[1], .7f);
-             SceneManager.LoadScene(2);
-
-        }
-    
-        if (collision.gameObject.tag.Equals("door3"))
-        {
-             Debug.Log("open");
-             //soundEffects.PlayOneShot(sound[1], .7f);
-             SceneManager.LoadScene(3);
-
-        }
-          
-          
+              isGrounded = false;
+        } 
     }
 
 }   

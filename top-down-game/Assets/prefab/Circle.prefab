@@ -167,3 +167,10 @@ MonoBehaviour:
   leftSprite: {fileID: 0}
   rightSprite: {fileID: 0}
   hasKey: 0
+  soundEffects: {fileID: 0}
+  itemCollect: {fileID: 0}
+  doorEnter: {fileID: 0}
+  sound: []
+  jumpForce: 0
+  isGrounded: 0
+  gm: {fileID: 0}
