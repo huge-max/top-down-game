@@ -8,6 +8,9 @@ TagManager:
   - key
   - door2
   - door3
+  - ground
+  - coin
+  - box
   layers:
   - Default
   - TransparentFX

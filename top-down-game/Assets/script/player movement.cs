@@ -69,10 +69,38 @@ public class playermovement : MonoBehaviour
             gm.score++;
             Destroy(collision.gameObject);
         } 
-    }
+   
+     
         
- 
-    private void OnCollisionExit2D(Collision2D collision)     
+        if (collision.gameObject.tag.Equals("door1"))
+        {
+            Debug.Log("change scene");
+            SceneManager.LoadScene(2);
+        }
+        
+        
+         if (collision.gameObject.tag.Equals("door2"))
+        {
+            Debug.Log("change scene");
+            SceneManager.LoadScene(3);
+        }
+        if (collision.gameObject.tag.Equals("door3"))
+        {
+            Debug.Log("change scene");
+            SceneManager.LoadScene(0);
+        }
+        
+         //check if colliding with a game object with specific tag
+        if (collision.gameObject.tag.Equals("box"))
+        {
+            Debug.Log("am dead");
+            Destroy(gameObject);
+            SceneManager.LoadScene(0);
+        }
+        
+     }
+        
+      private void OnCollisionExit2D(Collision2D collision)     
     {
         if(collision.gameObject.tag.Equals("ground"))
         {
@@ -80,4 +108,4 @@ public class playermovement : MonoBehaviour
         } 
     }
 
-}   
+}
